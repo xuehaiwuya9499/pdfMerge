@@ -1,0 +1,18 @@
+from PyPDF2 import PdfFileMerger
+import os
+
+files = os.listdir('.\\pdf_cache')    #current dir
+merger = PdfFileMerger()
+
+#sort
+#e.g. 1_4.pdg.pdf
+#especially for chaoxing app's downloaded file's pdz cache
+
+files.sort(key = lambda x:int(x.split('_')[0]))
+
+for file in files:
+    if file[-8:] == '.pdg.pdf':
+        merger.append(open('.\\pdf_cache\\'+file,'rb'))
+
+with open('三国演义（青少年版）.pdf', 'wb') as fout:
+    merger.write(fout)
